@@ -28,13 +28,11 @@ def _init_():
 	dimension=inputData.shape[0]	
 	number_classes=inputData.shape[1]
 	weight=0.01*np.random.randn(2,3)
-	bias=np.random.randn(number_classes,1)
-	#calculateScore(weight,inputData,bias,label)
+	bias=np.random.randn(number_classes,1)	
 	return weight,bias,inputData,label
 
 def calculateScore(weight,inputData,bias,label):
-	#print(inputData.shape)
-	#print(weight.shape)
+	
 	lambdha=0.0001
 	score=np.dot(inputData,weight)
 	exp=np.exp(score)
@@ -42,8 +40,7 @@ def calculateScore(weight,inputData,bias,label):
 	probability=exp/np.sum(exp,axis=1, keepdims=True)
 	for i in range(300):
 		data_loss+=-np.log(probability[i,label[i]])
-	#loss=-np.log(probability)
-	#print(probability)
+	
 	
 	total_loss=(data_loss/inputData.shape[0])+0.5*lambdha*np.sum(weight*weight)
 	print("loss=",total_loss)
@@ -67,7 +64,7 @@ def gradientDescent(weight,inputData,label,bias):
 def train_model(weight,bias,inputData,label):
 	for i in range(100000):
 		weight=gradientDescent(weight,inputData,label,bias)
-	#print(calculateScore(weight,inputData,bias,label))
+	
 
 	return weight
 
