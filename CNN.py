@@ -4,15 +4,16 @@ import NeuralNet as NNet
 import cPickle 
 import forwardPass as fPass
 import backPropagate as backProp
+import os 
 RECEPTIVE_FIELD=5
 STRIDE=1
 PADDING=0
 INPUT_FRAME=32
 dataGradient=np.zeros((5,5,3,784))
 output_frame_size=(INPUT_FRAME-RECEPTIVE_FIELD+(2*PADDING))/STRIDE+1
-
+pathname= os.path.dirname(sys.argv[0])
 def getData():
-	with open("E:\Arjun\work\iit\course\dl\project\cnn\cs231\cifar-10-batches-py\data_batch_1", 'rb') as fo:
+	with open(pathname+'\cifar-10-batches-py\data_batch_1', 'rb') as fo:
 		
 		dict = cPickle.load(fo)
 	
@@ -104,18 +105,6 @@ def backPropagation(Data,inputData,weightConv,weightFC1,weightFC2,bias1,bias2,la
 		weightConv=backPropConvLayer(Data,convGradient,weightConv)
 
 	return weightConv,weightFC1
-
-
-
-'''def trainCNN():
-
-	[inputData,weightFC2,biasFC1,biasFC2,labels]=setParameter()
-	[weightFC1,inputFC,dataGradient,probability,layer1_activation]=forwardPropogation(inputData,weight1,None,weightFC2,labels,biasFC1,biasFC2)
-	for i in range(10):
-		[weight1,weightFC1]=backPropagation(inputData,inputFC,weight1,weightFC1,weightFC2,biasFC1,biasFC2,labels,probability,layer1_activation)
-		[weightFC1,inputFC,dataGradient,probability]=forwardPropogation(inputData,weight1,weightFC1,weightFC2,labels,biasFC1,biasFC2)
-'''
-
 	
 
 
