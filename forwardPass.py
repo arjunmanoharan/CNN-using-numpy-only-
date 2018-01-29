@@ -1,5 +1,6 @@
 import numpy as np
 import sys
+import os
 import cPickle
 from numpy import unravel_index
 RECEPTIVE_FIELD=5
@@ -7,9 +8,9 @@ STRIDE=1
 PADDING=0
 INPUT_FRAME=32
 
-
+pathname=os.path.dirname(sys.argv[0])
 def getData():
-	with open("E:\Arjun\work\iit\course\dl\project\cnn\cs231\cifar-10-batches-py\data_batch_1", 'rb') as fo:
+	with open(pathname+'\cifar-10-batches-py\data_batch_1', 'rb') as fo:
 		dict = cPickle.load(fo)
 	inputData=dict["data"]
 	labels=dict["labels"]
